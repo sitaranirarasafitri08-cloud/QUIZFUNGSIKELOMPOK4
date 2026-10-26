@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Matematika Burung Hantu Pintar - Prof. Owi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sky: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                        }
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        quicksand: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f9ff;
+            background-image: radial-gradient(#bae6fd 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+        /* Animasi Mengapung Maskot */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 3.5s ease-in-out infinite;
+        }
+        /* Animasi Kedip Mata Burung Hantu */
+        @keyframes blink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        .owl-eye {
+            transform-origin: center;
+            animation: blink 4s infinite;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            border: 2px solid #bae6fd;
+        }
+        .timer-bar {
+            transition: width 1s linear;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between p-3 md:p-6">
+
+    <!-- HEADER & NAVBAR -->
+    <header class="max-w-4xl mx-auto w-full flex items-center justify-between bg-white/90 backdrop-blur border-2 border-sky-200 px-5 py-3 rounded-2xl shadow-sm mb-4">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="showScreen('home')">
+            <div class="w-11 h-11 bg-sky-400 rounded-full flex items-center justify-center text-white shadow-md">
+                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-sky-700 leading-tight">Prof. Owi</h1>
+                <p class="text-xs text-sky-500 font-bold uppercase tracking-wide">Kuis Matematika Interaktif</p>
+            </div>
+        </div>
+
+        <div id="header-badge" class="hidden sm:flex items-center space-x-2 bg-sky-100 text-sky-700 px-4 py-1.5 rounded-full text-sm font-semibold border border-sky-200">
+            <i class="fa-solid fa-star text-amber-400"></i>
+            <span id="quiz-mode-badge">Mode Kuis</span>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="max-w-4xl mx-auto w-full flex-grow flex flex-col justify-center my-auto">
+
+        <!-- 1. HALAMAN UTAMA / BERANDA -->
+        <section id="screen-home" class="glass-card rounded-3xl p-6 md:p-10 shadow-xl text-center relative overflow-hidden transition-all">
+            <!-- Simbol Matematika Dekoratif -->
+            <div class="absolute -top-6 -left-6 text-sky-200 text-7xl font-bold opacity-40 select-none">+</div>
+            <div class="absolute top-1/2 -right-6 text-sky-200 text-7xl font-bold opacity-40 select-none">÷</div>
+            <div class="absolute -bottom-6 left-1/3 text-sky-200 text-7xl font-bold opacity-40 select-none">×</div>
+
+            <!-- Maskot Burung Hantu SVG -->
+            <div class="w-36 h-36 mx-auto mb-4 animate-float relative cursor-pointer" onclick="owlGreeting()" title="Klik Prof. Owi!">
+                <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                    <!-- Badannya -->
+                    <ellipse cx="100" cy="115" rx="65" ry="70" fill="#38bdf8" />
+                    <!-- Perut -->
+                    <ellipse cx="100" cy="125" rx="45" ry="50" fill="#e0f2fe" />
+                    <path d="M 85 110 Q 90 115 95 110 M 105 110 Q 110 115 115 110 M 95 130 Q 100 135 105 130" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <!-- Sayap -->
+                    <path d="M 35 110 Q 20 130 45 155 Q 50 130 35 110 Z" fill="#0284c7" />
+                    <path d="M 165 110 Q 180 130 155 155 Q 150 130 165 110 Z" fill="#0284c7" />
+                    <!-- Mata -->
+                    <circle cx="70" cy="75" r="26" fill="#ffffff" stroke="#bae6fd" stroke-width="3"/>
+                    <circle cx="130" cy="75" r="26" fill="#ffffff" stroke="#bae6fd" stroke-width="3"/>
+                    <g class="owl-eye">
+                        <circle cx="75" cy="75" r="13" fill="#1e293b"/>
+                        <circle cx="78" cy="71" r="4" fill="#ffffff"/>
+                        <circle cx="125" cy="75" r="13" fill="#1e293b"/>
+                        <circle cx="128" cy="71" r="4" fill="#ffffff"/>
+                    </g>
+                    <!-- Paruh -->
+                    <polygon points="90,88 110,88 100,105" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/>
+                    <!-- Toga / Topi Toga -->
+                    <polygon points="100,15 160,35 100,55 40,35" fill="#1e293b"/>
+                    <rect x="80" y="42" width="40" height="15" fill="#334155" rx="3"/>
+                    <path d="M 150 38 L 155 65" stroke="#fbbf24" stroke-width="3"/>
+                    <circle cx="155" cy="68" r="4" fill="#fbbf24"/>
+                    <!-- Kaki -->
+                    <ellipse cx="80" cy="182" rx="12" ry="6" fill="#fbbf24"/>
+                    <ellipse cx="120" cy="182" rx="12" ry="6" fill="#fbbf24"/>
+                </svg>
+            </div>
+
+            <!-- Judul & Sambutan -->
+            <h2 class="text-3xl md:text-4xl font-extrabold text-sky-800 mb-2">Petualangan Matematika Prof. Owi</h2>
+            <p id="owl-speech" class="text-slate-600 max-w-lg mx-auto mb-8 bg-sky-50 border border-sky-200 p-3.5 rounded-2xl text-sm md:text-base font-medium shadow-sm transition-all">
+                "Halo! Aku Prof. Owi. Siap mengasah otakmu hari ini? Pilih mode kuis di bawah ini ya!"
+            </p>
+
+            <!-- Tombol Pilihan Mode Kuis -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <!-- Mode Kelompok -->
+                <button onclick="startQuiz('group')" class="group relative bg-gradient-to-br from-sky-400 to-sky-600 hover:from-sky-500 hover:to-sky-700 text-white p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-left flex flex-col justify-between border-2 border-sky-300">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Mode Tim</span>
+                            <i class="fa-solid fa-users text-2xl text-sky-100 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-1">Kuis Kelompok</h3>
+                        <p class="text-sky-100 text-sm mb-4">Diskusi seru bersama tim atau teman sekelas.</p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-semibold bg-black/10 p-2.5 rounded-xl">
+                        <span><i class="fa-solid fa-list-check mr-1"></i> 10 Soal PG</span>
+                        <span><i class="fa-solid fa-clock mr-1"></i> 2 Mnt / Soal</span>
+                    </div>
+                </button>
+
+                <!-- Mode Individu -->
+                <button onclick="startQuiz('individual')" class="group relative bg-gradient-to-br from-indigo-400 to-sky-600 hover:from-indigo-500 hover:to-sky-700 text-white p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-left flex flex-col justify-between border-2 border-indigo-300">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Mode Mandiri</span>
+                            <i class="fa-solid fa-user text-2xl text-indigo-100 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-1">Kuis Individu</h3>
+                        <p class="text-indigo-100 text-sm mb-4">Uji kecepatan berpikir dan ketelitian mandiri.</p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-semibold bg-black/10 p-2.5 rounded-xl">
+                        <span><i class="fa-solid fa-bolt mr-1"></i> 5 Soal PG</span>
+                        <span><i class="fa-solid fa-clock mr-1"></i> 2 Mnt / Soal</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. HALAMAN KUIS / PENERJAAN SOAL -->
+        <section id="screen-quiz" class="hidden glass-card rounded-3xl p-5 md:p-8 shadow-xl transition-all">
+            <!-- Header Progress & Timer -->
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-sky-100">
+                <div class="flex items-center space-x-3">
+                    <span id="question-number-badge" class="bg-sky-500 text-white text-sm font-bold px-3.5 py-1.5 rounded-xl shadow-sm">
+                        Soal 1 / 10
+                    </span>
+                    <span id="quiz-type-label" class="text-xs md:text-sm font-bold text-sky-700 uppercase tracking-wide">
+                        Kuis Kelompok
+                    </span>
+                </div>
+
+                <!-- Indikator Waktu 2 Menit -->
+                <div class="flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-4 py-1.5 rounded-xl shadow-sm">
+                    <i class="fa-solid fa-hourglass-half text-amber-500 animate-pulse"></i>
+                    <span class="text-xs font-bold uppercase hidden sm:inline">Sisa Waktu:</span>
+                    <span id="timer-display" class="font-mono text-lg font-bold">02:00</span>
+                </div>
+            </div>
+
+            <!-- Visual Progress Bar Timer -->
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden mb-6">
+                <div id="timer-progress" class="bg-gradient-to-r from-sky-400 to-amber-400 h-full w-full timer-bar"></div>
+            </div>
+
+            <!-- Teks Soal -->
+            <div class="mb-6 bg-sky-50/50 p-5 rounded-2xl border border-sky-100">
+                <div id="question-text" class="text-base md:text-xl font-bold text-slate-800 leading-relaxed">
+                    <!-- Text Soal di-inject via JS -->
+                </div>
+            </div>
+
+            <!-- Pilihan Ganda (A, B, C, D) -->
+            <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-8">
+                <!-- Opsi Jawaban di-inject via JS -->
+            </div>
+
+            <!-- Footer Navigasi Soal -->
+            <div class="flex items-center justify-between pt-4 border-t border-sky-100">
+                <div class="flex items-center space-x-2 text-slate-500 text-xs md:text-sm font-medium">
+                    <i class="fa-solid fa-lightbulb text-amber-400 text-lg"></i>
+                    <span>Pilih salah satu opsi jawaban sebelum lanjut!</span>
+                </div>
+                <button id="next-btn" onclick="nextQuestion()" disabled class="bg-slate-300 text-slate-500 font-bold px-6 py-2.5 rounded-2xl shadow transition-all flex items-center space-x-2 cursor-not-allowed">
+                    <span>Lanjut</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 3. HALAMAN HASIL & PEMBAHASAN -->
+        <section id="screen-result" class="hidden glass-card rounded-3xl p-6 md:p-10 shadow-xl transition-all">
+            <!-- Header Hasil -->
+            <div class="text-center mb-8">
+                <div class="w-28 h-28 mx-auto mb-3">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                        <ellipse cx="100" cy="115" rx="65" ry="70" fill="#38bdf8" />
+                        <ellipse cx="100" cy="125" rx="45" ry="50" fill="#e0f2fe" />
+                        <circle cx="70" cy="75" r="26" fill="#ffffff"/>
+                        <circle cx="130" cy="75" r="26" fill="#ffffff"/>
+                        <circle cx="75" cy="75" r="12" fill="#1e293b"/>
+                        <circle cx="125" cy="75" r="12" fill="#1e293b"/>
+                        <polygon points="90,88 110,88 100,105" fill="#fbbf24"/>
+                        <polygon points="100,15 160,35 100,55 40,35" fill="#1e293b"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-extrabold text-sky-800 mb-1">Hasil Kuis Selesai!</h2>
+                <p id="result-message" class="text-slate-600 font-semibold max-w-md mx-auto">
+                    Kerja bagus! Berikut adalah ringkasan hasil kuis kamu:
+                </p>
+            </div>
+
+            <!-- Kartu Skor & Ringkasan -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl text-center">
+                    <span class="text-xs text-sky-600 font-bold uppercase block mb-1">Skor Akhir</span>
+                    <span id="score-percentage" class="text-3xl font-extrabold text-sky-700">0%</span>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-center">
+                    <span class="text-xs text-emerald-600 font-bold uppercase block mb-1">Benar</span>
+                    <span id="correct-count" class="text-3xl font-extrabold text-emerald-600">0</span>
+                </div>
+                <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl text-center">
+                    <span class="text-xs text-rose-600 font-bold uppercase block mb-1">Salah</span>
+                    <span id="wrong-count" class="text-3xl font-extrabold text-rose-600">0</span>
+                </div>
+                <div class="bg-purple-50 border border-purple-200 p-4 rounded-2xl text-center">
+                    <span class="text-xs text-purple-600 font-bold uppercase block mb-1">Total Soal</span>
+                    <span id="total-questions-count" class="text-3xl font-extrabold text-purple-600">0</span>
+                </div>
+            </div>
+
+            <!-- Tombol Aksi -->
+            <div class="flex flex-wrap gap-3 justify-center mb-10">
+                <button onclick="showScreen('home')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-2xl shadow transition flex items-center space-x-2">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Menu Utama</span>
+                </button>
+                <button onclick="restartQuiz()" class="bg-sky-500 hover:bg-sky-600 text-white font-bold px-6 py-3 rounded-2xl shadow-lg transition flex items-center space-x-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Coba Lagi</span>
+                </button>
+            </div>
+
+            <!-- Bagian Pembahasan Soal -->
+            <div class="border-t border-sky-200 pt-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-9 h-9 bg-sky-500 text-white rounded-xl flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-sky-900">Pembahasan Lengkap</h3>
+                </div>
+
+                <!-- Kontainer Daftar Penjelasan -->
+                <div id="explanations-container" class="space-y-6">
+                    <!-- Pembahasan per nomor di-inject via JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="max-w-4xl mx-auto w-full text-center py-4 text-xs text-sky-600 font-semibold">
+        <p>© 2026 Kuis Matematika Burung Hantu Pintar (Prof. Owi)</p>
+    </footer>
+
+    <!-- LOGIKA JAVASCRIPT -->
+    <script>
+        // 1. DATA SOAL KELOMPOK (10 SOAL PG)
+        const groupQuestions = [
+            {
+                id: 1,
+                question: "Sebuah kelompok belajar membeli 4 pak buku tulis. Setiap pak berisi 12 buku. Jika seluruh buku tersebut dibagi rata kepada 6 anggota kelompok, berapa buku yang diterima setiap anggota?",
+                options: ["6 buku", "8 buku", "10 buku", "12 buku"],
+                correct: 1, // B (Indeks 1)
+                explanation: "<strong>Langkah 1:</strong> Hitung total buku = 4 pak × 12 buku = 48 buku.<br><strong>Langkah 2:</strong> Bagi ke 6 anggota = 48 ÷ 6 = 8 buku."
+            },
+            {
+                id: 2,
+                question: "Selesaikan persamaan aljabar berikut: Jika 3x + 5 = 20, berapakah nilai x?",
+                options: ["x = 3", "x = 4", "x = 5", "x = 6"],
+                correct: 2, // C
+                explanation: "3x + 5 = 20<br>3x = 20 - 5<br>3x = 15<br>x = 15 ÷ 3 = 5."
+            },
+            {
+                id: 3,
+                question: "Ibu membeli sebuah pizza. Budi memakan 1/4 bagian pizza, dan Siti memakan 2/8 bagian pizza. Berapa sisa bagian pizza Ibu?",
+                options: ["1/4 bagian", "1/2 bagian", "3/4 bagian", "Habis"],
+                correct: 1, // B
+                explanation: "Pecahan 2/8 dapat disederhanakan menjadi 1/4.<br>Total dimakan = 1/4 + 1/4 = 2/4 = 1/2 bagian.<br>Sisa pizza = 1 - 1/2 = 1/2 bagian."
+            },
+            {
+                id: 4,
+                question: "Sebuah lapangan berbentuk persegi panjang memiliki panjang 15 meter dan lebar 8 meter. Berapakah keliling dan luas lapangan tersebut?",
+                options: [
+                    "Keliling: 46 m, Luas: 120 m²",
+                    "Keliling: 23 m, Luas: 120 m²",
+                    "Keliling: 46 m, Luas: 60 m²",
+                    "Keliling: 30 m, Luas: 120 m²"
+                ],
+                correct: 0, // A
+                explanation: "<strong>Keliling</strong> = 2 × (p + l) = 2 × (15 + 8) = 2 × 23 = 46 meter.<br><strong>Luas</strong> = p × l = 15 × 8 = 120 m²."
+            },
+            {
+                id: 5,
+                question: "Berapakah hasil dari operasi hitung campuran: (15 + 25) × 4 ÷ 8 ?",
+                options: ["15", "20", "25", "30"],
+                correct: 1, // B
+                explanation: "Hitung operasi dalam kurung dahulu:<br>15 + 25 = 40<br>Kalikan: 40 × 4 = 160<br>Bagikan: 160 ÷ 8 = 20."
+            },
+            {
+                id: 6,
+                question: "Sebuah wadah berbentuk kubus memiliki panjang rusuk 6 cm. Berapakah volume wadah tersebut?",
+                options: ["36 cm³", "144 cm³", "216 cm³", "256 cm³"],
+                correct: 2, // C
+                explanation: "Volume Kubus = s × s × s = 6 cm × 6 cm × 6 cm = 216 cm³."
+            },
+            {
+                id: 7,
+                question: "Rata-rata nilai tes matematika 4 siswa adalah 80. Jika bergabung nilai siswa ke-5 yaitu 90, berapakah rata-rata nilai mereka sekarang?",
+                options: ["81", "82", "83", "84"],
+                correct: 1, // B
+                explanation: "Total nilai 4 siswa = 4 × 80 = 320.<br>Total nilai 5 siswa = 320 + 90 = 410.<br>Rata-rata baru = 410 ÷ 5 = 82."
+            },
+            {
+                id: 8,
+                question: "Sebuah bus berangkat pukul 07.15 dan sampai di tujuan pukul 09.45. Jika bus sempat berhenti beristirahat selama 30 menit, berapa lama waktu bus bergerak di jalan?",
+                options: ["1 jam 30 menit", "2 jam", "2 jam 30 menit", "3 jam"],
+                correct: 1, // B
+                explanation: "Waktu tempuh total = 09.45 - 07.15 = 2 jam 30 menit (150 menit).<br>Waktu bergerak = 150 menit - 30 menit = 120 menit = 2 jam."
+            },
+            {
+                id: 9,
+                question: "Berapakah bentuk pecahan desimal dari pecahan 3/5 ?",
+                options: ["0,3", "0,5", "0,6", "0,75"],
+                correct: 2, // C
+                explanation: "Ubah pecahan 3/5 menjadi persepuluhan: (3 × 2) / (5 × 2) = 6/10 = 0,6."
+            },
+            {
+                id: 10,
+                question: "Dalam sebuah kantong terdapat 5 kelereng merah, 3 kelereng biru, dan 2 kelereng hijau. Berapa persentase kelereng biru di kantong tersebut?",
+                options: ["20%", "30%", "40%", "50%"],
+                correct: 1, // B
+                explanation: "Total kelereng = 5 + 3 + 2 = 10 kelereng.<br>Persentase kelereng biru = (3 / 10) × 100% = 30%."
+            }
+        ];
+
+        // 2. DATA SOAL INDIVIDU (5 SOAL PG)
+        const individualQuestions = [
+            {
+                id: 1,
+                question: "Berapakah hasil dari 127 + 285 ?",
+                options: ["402", "412", "422", "432"],
+                correct: 1, // B
+                explanation: "127 + 285 = 412."
+            },
+            {
+                id: 2,
+                question: "Sebuah segitiga memiliki alas 10 cm dan tinggi 12 cm. Berapakah luas segitiga tersebut?",
+                options: ["30 cm²", "60 cm²", "120 cm²", "90 cm²"],
+                correct: 1, // B
+                explanation: "Luas Segitiga = 1/2 × alas × tinggi = 1/2 × 10 × 12 = 60 cm²."
+            },
+            {
+                id: 3,
+                question: "Andi memiliki 5 kotak pensil. Setiap kotak berisi 8 pensil. Jika Andi memberikan 12 pensil kepada adiknya, berapa sisa pensil Andi?",
+                options: ["24 pensil", "28 pensil", "32 pensil", "36 pensil"],
+                correct: 1, // B
+                explanation: "Total awal = 5 × 8 = 40 pensil.<br>Sisa pensil = 40 - 12 = 28 pensil."
+            },
+            {
+                id: 4,
+                question: "Berapakah FPB (Faktor Persekutuan Terbesar) dari bilangan 12 dan 18?",
+                options: ["2", "3", "6", "12"],
+                correct: 2, // C
+                explanation: "Faktor 12 = 1, 2, 3, 4, 6, 12.<br>Faktor 18 = 1, 2, 3, 6, 9, 18.<br>Faktor persekutuan terbesar adalah 6."
+            },
+            {
+                id: 5,
+                question: "Berapakah nilai dari 25% dari 200?",
+                options: ["25", "40", "50", "75"],
+                correct: 2, // C
+                explanation: "25% × 200 = (25 / 100) × 200 = 25 × 2 = 50."
+            }
+        ];
+
+        // STATE SISTEM
+        let currentMode = 'group'; // 'group' atau 'individual'
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = [];
+        let timerInterval = null;
+        const TIME_PER_QUESTION = 120; // 2 Menit (120 Detik)
+        let timeLeft = TIME_PER_QUESTION;
+
+        // ELEMENT REF
+        const screenHome = document.getElementById('screen-home');
+        const screenQuiz = document.getElementById('screen-quiz');
+        const screenResult = document.getElementById('screen-result');
+        const headerBadge = document.getElementById('header-badge');
+        const quizModeBadge = document.getElementById('quiz-mode-badge');
+        const owlSpeech = document.getElementById('owl-speech');
+
+        // NAVIGASI SKRIN
+        function showScreen(screenName) {
+            screenHome.classList.add('hidden');
+            screenQuiz.classList.add('hidden');
+            screenResult.classList.add('hidden');
+
+            if (screenName === 'home') {
+                screenHome.classList.remove('hidden');
+                headerBadge.classList.add('hidden');
+                clearInterval(timerInterval);
+            } else if (screenName === 'quiz') {
+                screenQuiz.classList.remove('hidden');
+                headerBadge.classList.remove('hidden');
+            } else if (screenName === 'result') {
+                screenResult.classList.remove('hidden');
+                headerBadge.classList.add('hidden');
+                clearInterval(timerInterval);
+            }
+        }
+
+        // CHAT MASKOT PROF OWI
+        function owlGreeting() {
+            const greetings = [
+                "\"Hoo-hoo! Semangat belajarnya ya!\"",
+                "\"Matematika itu seru jika kamu sering berlatih!\"",
+                "\"Pilih mode Kuis Kelompok (10 soal) atau Individu (5 soal) untuk mulai!\"",
+                "\"Setiap soal ada waktunya 2 menit, gunakan waktu dengan cermat!\""
+            ];
+            const random = Math.floor(Math.random() * greetings.length);
+            owlSpeech.innerText = greetings[random];
+        }
+
+        // MEMULAI KUIS
+        function startQuiz(mode) {
+            currentMode = mode;
+            if (mode === 'group') {
+                currentQuestions = [...groupQuestions];
+                quizModeBadge.innerText = "Kuis Kelompok (10 Soal)";
+            } else {
+                currentQuestions = [...individualQuestions];
+                quizModeBadge.innerText = "Kuis Individu (5 Soal)";
+            }
+
+            currentIndex = 0;
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            
+            showScreen('quiz');
+            loadQuestion();
+        }
+
+        function restartQuiz() {
+            startQuiz(currentMode);
+        }
+
+        // LOAD SOAL & OPSI
+        function loadQuestion() {
+            clearInterval(timerInterval);
+            timeLeft = TIME_PER_QUESTION;
+            updateTimerDisplay();
+
+            const q = currentQuestions[currentIndex];
+            
+            document.getElementById('question-number-badge').innerText = `Soal ${currentIndex + 1} / ${currentQuestions.length}`;
+            document.getElementById('quiz-type-label').innerText = currentMode === 'group' ? 'Kuis Kelompok' : 'Kuis Individu';
+            document.getElementById('question-text').innerHTML = q.question;
+
+            // Render Pilihan Ganda A, B, C, D
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = userAnswers[currentIndex] === idx;
+                const btn = document.createElement('button');
+                btn.className = `p-4 rounded-2xl text-left border-2 font-semibold transition-all flex items-center space-x-3 ${
+                    isSelected 
+                    ? 'bg-sky-500 border-sky-600 text-white shadow-md scale-[1.01]' 
+                    : 'bg-white border-sky-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300'
+                }`;
+                btn.onclick = () => selectOption(idx);
+
+                const optionLetter = String.fromCharCode(65 + idx); // A, B, C, D
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm ${
+                        isSelected ? 'bg-white text-sky-600' : 'bg-sky-100 text-sky-700'
+                    }">${optionLetter}</span>
+                    <span class="flex-grow text-sm md:text-base">${opt}</span>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            // Update Tombol Lanjut
+            const nextBtn = document.getElementById('next-btn');
+            if (userAnswers[currentIndex] !== null) {
+                nextBtn.disabled = false;
+                nextBtn.className = "bg-sky-500 hover:bg-sky-600 text-white font-bold px-6 py-2.5 rounded-2xl shadow transition-all flex items-center space-x-2 cursor-pointer";
+            } else {
+                nextBtn.disabled = true;
+                nextBtn.className = "bg-slate-300 text-slate-500 font-bold px-6 py-2.5 rounded-2xl shadow transition-all flex items-center space-x-2 cursor-not-allowed";
+            }
+
+            // Jalankan Timer 2 Menit
+            startTimer();
+        }
+
+        function selectOption(index) {
+            userAnswers[currentIndex] = index;
+            loadQuestion();
+        }
+
+        // LOGIKA TIMER (2 MENIT / SOAL)
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    // Jika waktu 2 menit habis, otomatis lanjut ke soal berikutnya
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const displayStr = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            document.getElementById('timer-display').innerText = displayStr;
+
+            const percentage = (timeLeft / TIME_PER_QUESTION) * 100;
+            const progressBar = document.getElementById('timer-progress');
+            progressBar.style.width = `${percentage}%`;
+
+            if (timeLeft <= 20) {
+                progressBar.className = "bg-rose-500 h-full w-full timer-bar";
+            } else {
+                progressBar.className = "bg-gradient-to-r from-sky-400 to-amber-400 h-full w-full timer-bar";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        // FINISH & TAMPILKAN HASIL
+        function finishQuiz() {
+            clearInterval(timerInterval);
+
+            let correctCount = 0;
+            currentQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            const wrongCount = currentQuestions.length - correctCount;
+            const percentage = Math.round((correctCount / currentQuestions.length) * 100);
+
+            document.getElementById('score-percentage').innerText = `${percentage}%`;
+            document.getElementById('correct-count').innerText = correctCount;
+            document.getElementById('wrong-count').innerText = wrongCount;
+            document.getElementById('total-questions-count').innerText = currentQuestions.length;
+
+            const msgEl = document.getElementById('result-message');
+            if (percentage === 100) {
+                msgEl.innerText = "\"Sempurna! Kamu luar biasa! Prof. Owi sangat bangga denganmu!\" 🏆🎉";
+            } else if (percentage >= 70) {
+                msgEl.innerText = "\"Kerja Bagus! Nilai kamu sangat baik, terus pertahankan!\" 🌟";
+            } else if (percentage >= 50) {
+                msgEl.innerText = "\"Bagus! Kamu sudah berusaha, pelajari pembahasannya agar makin mahir!\" 📚";
+            } else {
+                msgEl.innerText = "\"Jangan berkecil hati! Yuk pelajari pembahasan di bawah ini dan coba lagi!\" 💪🏼";
+            }
+
+            renderExplanations();
+            showScreen('result');
+        }
+
+        // PEMBAHASAN SOAL DETIL
+        function renderExplanations() {
+            const container = document.getElementById('explanations-container');
+            container.innerHTML = '';
+
+            currentQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.correct;
+
+                const item = document.createElement('div');
+                item.className = `p-5 rounded-2xl border-2 transition-all ${
+                    isCorrect ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'
+                }`;
+
+                const userAnsText = userAns !== null ? `${String.fromCharCode(65 + userAns)}. ${q.options[userAns]}` : "Tidak dijawab (Waktu habis)";
+                const correctAnsText = `${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}`;
+
+                item.innerHTML = `
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs ${
+                                isCorrect ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'
+                            }">
+                                ${idx + 1}
+                            </span>
+                            <h4 class="font-bold text-slate-800 text-base md:text-lg">Soal Nomor ${idx + 1}</h4>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${
+                            isCorrect ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
+                        }">
+                            <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'} mr-1"></i>
+                            ${isCorrect ? 'Benar' : 'Salah'}
+                        </span>
+                    </div>
+
+                    <p class="text-slate-800 font-semibold mb-4 text-sm md:text-base">${q.question}</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs md:text-sm mb-4">
+                        <div class="p-3 rounded-xl ${isCorrect ? 'bg-emerald-100/70 text-emerald-900' : 'bg-rose-100/70 text-rose-900'}">
+                            <span class="font-bold block text-xs opacity-75 mb-0.5">Jawaban Anda:</span>
+                            <span class="font-semibold">${userAnsText}</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-sky-100/70 text-sky-900">
+                            <span class="font-bold block text-xs opacity-75 mb-0.5">Jawaban Benar:</span>
+                            <span class="font-semibold">${correctAnsText}</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-sky-100 text-xs md:text-sm text-slate-700 shadow-sm">
+                        <div class="font-bold text-sky-700 mb-1 flex items-center space-x-1">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Langkah Pembahasan:</span>
+                        </div>
+                        <div class="leading-relaxed">${q.explanation}</div>
+                    </div>
+                `;
+
+                container.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>
