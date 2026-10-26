@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Matematika Burung Hantu Pintar - Prof. Owi</title>
+    <title>Kuis Matematika BAB IV Fungsi </title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -162,9 +162,9 @@
             </div>
 
             <!-- Judul & Sambutan -->
-            <h2 class="text-3xl md:text-4xl font-extrabold text-sky-800 mb-2">Petualangan Matematika Prof. Owi</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-sky-800 mb-2">Petualangan Matematika Fungsi </h2>
             <p id="owl-speech" class="text-slate-600 max-w-lg mx-auto mb-8 bg-sky-50 border border-sky-200 p-3.5 rounded-2xl text-sm md:text-base font-medium shadow-sm transition-all">
-                "Halo! Aku Prof. Owi. Siap mengasah otakmu hari ini? Pilih mode kuis di bawah ini ya!"
+                "Halo! Teman-teman. Siap mengasah otakmu hari ini? Pilih mode kuis di bawah ini ya!"
             </p>
 
             <!-- Tombol Pilihan Mode Kuis -->
@@ -399,7 +399,7 @@
 
     <!-- FOOTER -->
     <footer class="max-w-4xl mx-auto w-full text-center py-4 text-xs text-sky-600 font-semibold no-print">
-        <p>© 2026 Kuis Matematika Burung Hantu Pintar (Prof. Owi)</p>
+        <p>© 2026 Kuis Matematika FUNGSI </p>
     </footer>
 
     <!-- LOGIKA JAVASCRIPT -->
@@ -408,76 +408,76 @@
         const groupQuestions = [
             {
                 id: 1,
-                question: "Sebuah kelompok belajar membeli 4 pak buku tulis. Setiap pak berisi 12 buku. Jika seluruh buku tersebut dibagi rata kepada 6 anggota kelompok, berapa buku yang diterima setiap anggota?",
-                options: ["6 buku", "8 buku", "10 buku", "12 buku"],
+                question: "Diketahui fungsi f(x)= 3x - 5.jika f(5) adalah...",
+                options: ["15", "17", "18", "20"],
                 correct: 1, // B
                 explanation: "<strong>Langkah 1:</strong> Hitung total buku = 4 pak × 12 buku = 48 buku.<br><strong>Langkah 2:</strong> Bagi ke 6 anggota = 48 ÷ 6 = 8 buku."
             },
             {
                 id: 2,
-                question: "Selesaikan persamaan aljabar berikut: Jika 3x + 5 = 20, berapakah nilai x?",
-                options: ["x = 3", "x = 4", "x = 5", "x = 6"],
+                question: "Diketahui f(x) = 2x - 7. jika f(x)=9, nilai x adalah...",
+                options: ["3", "4", "7", "6"],
                 correct: 2, // C
                 explanation: "3x + 5 = 20<br>3x = 20 - 5<br>3x = 15<br>x = 15 ÷ 3 = 5."
             },
             {
                 id: 3,
-                question: "Ibu membeli sebuah pizza. Budi memakan 1/4 bagian pizza, dan Siti memakan 2/8 bagian pizza. Berapa sisa bagian pizza Ibu?",
-                options: ["1/4 bagian", "1/2 bagian", "3/4 bagian", "Habis"],
+                question: "Suatu fungsi   disebut bijektif apabila...",
+                options: ["Hanya Injektif", "Hanya surjektif", "Injektif dsn surjektif", "Tidak injektif dan surjektif"],
                 correct: 1, // B
                 explanation: "Pecahan 2/8 dapat disederhanakan menjadi 1/4.<br>Total dimakan = 1/4 + 1/4 = 2/4 = 1/2 bagian.<br>Sisa pizza = 1 - 1/2 = 1/2 bagian."
             },
             {
                 id: 4,
-                question: "Sebuah lapangan berbentuk persegi panjang memiliki panjang 15 meter dan lebar 8 meter. Berapakah keliling dan luas lapangan tersebut?",
+                question: "Jika suatu fungsi bersifat surjektif, artinya...",
                 options: [
-                    "Keliling: 46 m, Luas: 120 m²",
-                    "Keliling: 23 m, Luas: 120 m²",
-                    "Keliling: 46 m, Luas: 60 m²",
-                    "Keliling: 30 m, Luas: 120 m²"
+                    "Setiap anggota kodomain memiliki minimal satu pasangan dari domain",
+                    "Setiap anggota domain memiliki hasil yang sama",
+                    "Tidak ada anggota domain yang memiliki pasangan",
+                    "Setiap anggota domain memiliki dua hasil pemetaan"
                 ],
                 correct: 0, // A
                 explanation: "<strong>Keliling</strong> = 2 × (p + l) = 2 × (15 + 8) = 2 × 23 = 46 meter.<br><strong>Luas</strong> = p × l = 15 × 8 = 120 m²."
             },
             {
                 id: 5,
-                question: "Berapakah hasil dari operasi hitung campuran: (15 + 25) × 4 ÷ 8 ?",
+                question: "Diketahui f(X)= 12x + 1. Gradien fungsi tersebut adalah...",
                 options: ["15", "20", "25", "30"],
                 correct: 1, // B
                 explanation: "Hitung operasi dalam kurung dahulu:<br>15 + 25 = 40<br>Kalikan: 40 × 4 = 160<br>Bagikan: 160 ÷ 8 = 20."
             },
             {
                 id: 6,
-                question: "Sebuah wadah berbentuk kubus memiliki panjang rusuk 6 cm. Berapakah volume wadah tersebut?",
-                options: ["36 cm³", "144 cm³", "216 cm³", "256 cm³"],
+                question: "Bentuk umum fungsi kuadrat adalah...",
+                options: ["y = ax + b", "y = ax^2 + bx + c, a = 0", "y = a", "y=x"],
                 correct: 2, // C
                 explanation: "Volume Kubus = s × s × s = 6 cm × 6 cm × 6 cm = 216 cm³."
             },
             {
                 id: 7,
-                question: "Rata-rata nilai tes matematika 4 siswa adalah 80. Jika bergabung nilai siswa ke-5 yaitu 90, berapakah rata-rata nilai mereka sekarang?",
-                options: ["81", "82", "83", "84"],
+                question: "Fungsi yang  dinyatakan dengan f(X) = x disebut...",
+                options: ["Fungsi konstan", "Fungsi kuadrat", "Fungsi identitas", "Fungsi linear konstan"],
                 correct: 1, // B
                 explanation: "Total nilai 4 siswa = 4 × 80 = 320.<br>Total nilai 5 siswa = 320 + 90 = 410.<br>Rata-rata baru = 410 ÷ 5 = 82."
             },
             {
                 id: 8,
-                question: "Sebuah bus berangkat pukul 07.15 dan sampai di tujuan pukul 09.45. Jika bus sempat berhenti beristirahat selama 30 menit, berapa lama waktu bus bergerak di jalan?",
-                options: ["1 jam 30 menit", "2 jam", "2 jam 30 menit", "3 jam"],
+                question: "Bentuk umum fungsi linear adalah...",
+                options: ["y = ax + b", "y=ax^2 + bx + c", "y = a", "y = x^2"],
                 correct: 1, // B
                 explanation: "Waktu tempuh total = 09.45 - 07.15 = 2 jam 30 menit (150 menit).<br>Waktu bergerak = 150 menit - 30 menit = 120 menit = 2 jam."
             },
             {
                 id: 9,
-                question: "Berapakah bentuk pecahan desimal dari pecahan 3/5 ?",
-                options: ["0,3", "0,5", "0,6", "0,75"],
+                question: "Fungsi kuadrat f(x)= x^2 - 4x + 3 memiliki  sumbu simetri...",
+                options: ["x=2", "x=1", "x=5", "x=4"],
                 correct: 2, // C
                 explanation: "Ubah pecahan 3/5 menjadi persepuluhan: (3 × 2) / (5 × 2) = 6/10 = 0,6."
             },
             {
                 id: 10,
-                question: "Dalam sebuah kantong terdapat 5 kelereng merah, 3 kelereng biru, dan 2 kelereng hijau. Berapa persentase kelereng biru di kantong tersebut?",
-                options: ["20%", "30%", "40%", "50%"],
+                question: "Diketahui fungsi f(x)= 5. Nilai F(10) adalah...",
+                options: ["2", "3", "5", "0"],
                 correct: 1, // B
                 explanation: "Total kelereng = 5 + 3 + 2 = 10 kelereng.<br>Persentase kelereng biru = (3 / 10) × 100% = 30%."
             }
@@ -487,35 +487,35 @@
         const individualQuestions = [
             {
                 id: 1,
-                question: "Berapakah hasil dari 127 + 285 ?",
-                options: ["402", "412", "422", "432"],
+                question: "Diketahui fungsi f(x) = 3x - 5.jika f(a)=16 maka nilai a adalah...",
+                options: ["6", "7", "9", "8"],
                 correct: 1, // B
                 explanation: "127 + 285 = 412."
             },
             {
                 id: 2,
-                question: "Sebuah segitiga memiliki alas 10 cm dan tinggi 12 cm. Berapakah luas segitiga tersebut?",
-                options: ["30 cm²", "60 cm²", "120 cm²", "90 cm²"],
-                correct: 1, // B
+                question: "Suatu fungsi disebut injektif apabila...",
+                options: ["Semua anggota domain memiliki hasil yang sama", "Dua anggota domain berbeda memiliki hasil pemetaan berbeda", "Setiap anggota kodomain pasti memiliki pasangan", "Ada anggota domain yang tidak memiliki pasangan"],
+                correct: 1, // A
                 explanation: "Luas Segitiga = 1/2 × alas × tinggi = 1/2 × 10 × 12 = 60 cm²."
             },
             {
                 id: 3,
-                question: "Andi memiliki 5 kotak pensil. Setiap kotak berisi 8 pensil. Jika Andi memberikan 12 pensil kepada adiknya, berapa sisa pensil Andi?",
-                options: ["24 pensil", "28 pensil", "32 pensil", "36 pensil"],
+                question: "Suatu relasi di sebut fungsi...",
+                options: ["Setiap anggota domain memiliki dua pasangan di kodomain", "Setiap anggota kodomain memiliki dua pasangan ", "Semua anggota kodomain harus memiliki pasangan", "Setip anggota domain tidak memiliki pasangan"],
                 correct: 1, // B
                 explanation: "Total awal = 5 × 8 = 40 pensil.<br>Sisa pensil = 40 - 12 = 28 pensil."
             },
             {
                 id: 4,
-                question: "Berapakah FPB (Faktor Persekutuan Terbesar) dari bilangan 12 dan 18?",
-                options: ["2", "3", "6", "12"],
+                question: "Fungsi yang memiliki nilai keluaran tetap untuk setiap nilai masukkan disebut...",
+                options: ["Fungsi linear", "Fungsi kuadrat", "Fungsi identitas", "Fungsi konstan"],
                 correct: 2, // C
                 explanation: "Faktor 12 = 1, 2, 3, 4, 6, 12.<br>Faktor 18 = 1, 2, 3, 6, 9, 18.<br>Faktor persekutuan terbesar adalah 6."
             },
             {
                 id: 5,
-                question: "Berapakah nilai dari 25% dari 200?",
+                question: "Diketahui fungsi f(x) = x^2 - 4x + 3, nilai dari f(5) - f(2) adalah...",
                 options: ["25", "40", "50", "75"],
                 correct: 2, // C
                 explanation: "25% × 200 = (25 / 100) × 200 = 25 × 2 = 50."
